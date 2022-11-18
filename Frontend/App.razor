@@ -1,0 +1,11 @@
+﻿@using Dashboard.Shared;
+
+<HxGrid TItem="Event" @ref="grid" Responsive="true" DataProvider="GetGridData" PageSize="10">
+    <Columns>
+        <HxGridColumn TItem="Event" HeaderText="Severity" ItemTextSelector="@(item => item.Severity)" />
+        <HxGridColumn TItem="Event" HeaderText="Description" ItemTextSelector="@(item => item.Description)" />
+        <HxGridColumn TItem="Event" HeaderText="Category" ItemTextSelector="@(item => item.Category)" />
+        <HxGridColumn TItem="Event" HeaderText="Published at"
+            ItemTextSelector="@(item => item.PublishedAt.ToDiagnosticString())" />
+    </Columns>
+</HxGrid>

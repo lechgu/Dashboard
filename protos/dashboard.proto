@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "Dashboard.Shared";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+message RawEvent
+{
+    string category = 1;
+    string severity = 2;
+    string description = 3;
+}
+
+service Collector {
+    rpc Publish(RawEvent) returns (google.protobuf.Empty);
+}
+
+message Event
+{
+    string category = 1;
+    string severity = 2;
+    string description = 3;
+    google.protobuf.Timestamp published_at = 4;
+}
+
+message ReportRequest {
+    int32 skip = 1;
+    int32 take = 2;
+}
+
+message ReportResponse {
+    repeated Event items = 1;
+}
+
+service Reporter {
+    rpc Report(ReportRequest) returns (ReportResponse);
+}
